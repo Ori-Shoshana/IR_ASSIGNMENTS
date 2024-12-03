@@ -14,14 +14,9 @@ def calculate_chi2_statistic(tfidf_matrix, labels):
     return chi2_stat, p_val
 
 # פונקציה לשמירת התוצאות לאקסל
-def save_to_excel(output_path, ig_df, chi2_df, file_name):
-    # קיצור שם הגיליון אם הוא ארוך מדי
-    ig_sheet_name = f"{file_name}_IG"[:31]
-    chi2_sheet_name = f"{file_name}_Chi2"[:31]
-    
+def save_to_excel(output_path, combined_df, file_name):
     with pd.ExcelWriter(output_path, engine='xlsxwriter') as writer:
-        ig_df.to_excel(writer, sheet_name=ig_sheet_name, index=False)
-        chi2_df.to_excel(writer, sheet_name=chi2_sheet_name, index=False)
+        combined_df.to_excel(writer, sheet_name=f"{file_name[:31]}", index=False)
 
 # פונקציה לעיבוד כל הקבצים
 def process_tfidf_and_calculate_metrics():
@@ -58,9 +53,12 @@ def process_tfidf_and_calculate_metrics():
                 'p_value': p_val
             })
             
+            # שילוב של שני ה-DataFrames
+            combined_df = pd.merge(ig_df, chi2_df, on="feature", how="inner")
+            
             # שמירה לקובץ Excel
             output_path = os.path.join(results_folder, f"{file_name}_metrics.xlsx")
-            save_to_excel(output_path, ig_df, chi2_df, file_name)
+            save_to_excel(output_path, combined_df, file_name)
             print(f"Saved metrics for {file_name} to {output_path}")
 
 # הרצת הפונקציה
