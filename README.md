@@ -1,4 +1,4 @@
-# IR_ASSIGNMENTS
+# IR_ASSIGNMENTS_1
 
 # Text Embedding and Processing Pipeline
 
@@ -6,7 +6,7 @@
 
 **Participants**:  
 - **Name**: אמיר חי תמר | **ID**: 322879339  
-- **Name**: אורי שושנה | **ID**: 324891137  
+- **Name**: אורי שושנה | **ID**: 324891134  
 
 **Group Number**: 157125.2.5785
 
@@ -20,11 +20,7 @@ This project involves processing raw text data from newspapers to generate meani
 
 ## Workflow
 
----
-
-## Workflow
-
-### 1. Data Preprocessing
+### Data Preprocessing
 - **Script**: `main.py`
 - Cleans raw text data by:
   - Removing special characters and punctuation.
@@ -33,6 +29,55 @@ This project involves processing raw text data from newspapers to generate meani
 - Outputs:
   - Cleaned data (`cleaned/`).
   - Lemmatized data (`lemmatized/`).
+
+---
+
+## TF-IDF Calculation for Text Documents
+### Description
+
+The script `tfidf.py` computes the **TF-IDF (Term Frequency-Inverse Document Frequency)** matrices for text documents from both cleaned and lemmatized datasets. It generates eight separate CSV files as output, corresponding to the following:
+
+1. **Cleaned Data**: TF-IDF matrices for articles processed without lemmatization.
+2. **Lemmatized Data**: TF-IDF matrices for articles processed with lemmatization.
+
+Each dataset contains one file for each newspaper: `A-J`, `BBC`, `J-P`, and `NY-T`.
+
+---
+
+### Key Functionality
+
+1. **Mapping Input Files**:
+   - The script reads a dictionary of file names and their corresponding text columns.
+
+2. **Document Processing**:
+   - Reads CSV files containing raw text data.
+   - Cleans and removes empty entries.
+
+3. **TF-IDF Matrix Calculation**:
+   - Computes the TF-IDF values for each document using scikit-learn's `TfidfVectorizer`.
+   - Filters out terms that appear in fewer than 5 documents.
+
+4. **Saving Results**:
+   - Converts the sparse matrix to a dense representation and saves it as a CSV file.
+
+---
+
+### Outputs
+
+The script generates **8 CSV files**, stored in the `tfidf_output/` folder:
+
+1. **Cleaned Data TF-IDF Matrices**:
+   - `A-J_cleaned_TFIDF-Word_tfidf.csv`
+   - `BBC_cleaned_TFIDF-Word_tfidf.csv`
+   - `J-P_cleaned_TFIDF-Word_tfidf.csv`
+   - `NY-T_cleaned_TFIDF-Word_tfidf.csv`
+
+2. **Lemmatized Data TF-IDF Matrices**:
+   - `A-J_lemmatized_TFIDF-Lemm_tfidf.csv`
+   - `BBC_lemmatized_TFIDF-Lemm_tfidf.csv`
+   - `J-P_lemmatized_TFIDF-Lemm_tfidf.csv`
+   - `NY-T_lemmatized_TFIDF-Lemm_tfidf.csv`
+
 
 ### 2. Text Representation Techniques
 #### a. **Word2Vec**
@@ -52,7 +97,7 @@ This project involves processing raw text data from newspapers to generate meani
 - Uses Sentence-BERT to encode documents into sentence-level vectors.
 
 ### 3. Outputs
-Each text representation method produces vectors stored as CSV files in the respective subfolders under `vectors/`.
+Each text representation method produces vectors stored as CSV files in the respective subfolders.
 
 ---
 
@@ -102,11 +147,3 @@ Each method generates:
    - The quality of embeddings is highly dependent on the preprocessing stage, especially for Word2Vec.
 
 ---
-
-## How to Run
-
-1. Place the raw Excel file (`posts_first_targil.xlsx`).
-2. Run the preprocessing script:
-   ```bash
-   python scripts/main.py
-3. and then run each file..
