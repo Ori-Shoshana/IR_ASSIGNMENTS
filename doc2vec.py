@@ -36,7 +36,7 @@ for sheet_name in sheets.sheet_names:
         ]
 
     # בניית מודל Doc2Vec עבור הגיליון הנוכחי
-    model = Doc2Vec(vector_size=1, min_count=2, epochs=40, workers=4)
+    model = Doc2Vec(vector_size=300, min_count=2, epochs=40, workers=4)
     model.build_vocab(tagged_documents)
     model.train(tagged_documents, total_examples=model.corpus_count, epochs=model.epochs)
     doc2vec_models[sheet_name] = model
