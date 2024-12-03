@@ -101,6 +101,56 @@ Each text representation method produces vectors stored as CSV files in the resp
 
 ---
 
+## Feature Importance Metrics: Information Gain and Chi-Squared Statistic
+
+### Description
+
+The script `feature_metrics.py` computes feature importance metrics for terms in the TF-IDF matrices generated earlier. It calculates:
+
+1. **Information Gain (IG)**: Measures the relevance of features (terms) to the classification task.
+2. **Chi-Squared Statistic (Chi²)**: Evaluates the independence between features and target labels.
+
+The output is stored as Excel files containing the metrics for each feature in the TF-IDF matrices.
+
+---
+
+### Key Functionality
+
+1. **Feature Importance Metrics**:
+   - **Information Gain**:
+     - Uses scikit-learn's `mutual_info_classif` to compute the relevance of features.
+   - **Chi-Squared Statistic**:
+     - Uses scikit-learn's `chi2` to compute feature independence scores.
+
+2. **Results Storage**:
+   - Saves the results to an Excel file with two sheets:
+     - `Information Gain`: Features ranked by their information gain values.
+     - `Chi-Squared`: Features ranked by their Chi-squared statistic values and associated p-values.
+
+---
+
+### Outputs
+
+The script generates **8 Excel files**, stored in the `chi2-info/` folder:
+
+1. **Cleaned Data Metrics**:
+   - `A-J_cleaned_TFIDF-Word_tfidf_metrics.xlsx`
+   - `BBC_cleaned_TFIDF-Word_tfidf_metrics.xlsx`
+   - `J-P_cleaned_TFIDF-Word_tfidf_metrics.xlsx`
+   - `NY-T_cleaned_TFIDF-Word_tfidf_metrics.xlsx`
+
+2. **Lemmatized Data Metrics**:
+   - `A-J_lemmatized_TFIDF-Lemm_tfidf_metrics.xlsx`
+   - `BBC_lemmatized_TFIDF-Lemm_tfidf_metrics.xlsx`
+   - `J-P_lemmatized_TFIDF-Lemm_tfidf_metrics.xlsx`
+   - `NY-T_lemmatized_TFIDF-Lemm_tfidf_metrics.xlsx`
+
+Each file contains two sheets:
+- **Information Gain**: Features ranked by their relevance to the classification task.
+- **Chi-Squared**: Features ranked by their statistical significance.
+
+---
+
 ## Technologies Used
 
 - **Python Libraries**:
